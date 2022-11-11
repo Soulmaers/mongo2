@@ -30,7 +30,7 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
     const { title, description, authors } = req.body
-    const newBook = new Book(title, description, authors)
+    const newBook = new Book({title, description, authors})
     try {
         await newBook.save();
         res.json(newBook)
@@ -47,8 +47,8 @@ router.put('/:id', async (req, res) => {
     const { id } = req.params;
     const { title, description, authors } = req.body
     try {
-        await Book.findByIdAndUpdate(id, { title, description, authors })
-        res.redirect(`/book/${id}`)
+        const book = await Book.findByIdAndUpdate(id, { title, description, authors })
+        res.redirect(`/books/${id}`)
 
     } catch (e) {
 
