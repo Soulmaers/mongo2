@@ -5,12 +5,12 @@ const mongoose = require('mongoose')
 
 const app = express();
 
-const todoRouter = require('./routes/todo')
+const bookRouter = require('./routes/book')
 
 const port = process.env.PORT || 3333;
 
 app.use(express.json())
-app.use('/todo', todoRouter)
+app.use('/books', bookRouter)
 async function start() {
     try {
         await mongoose.connect('mongodb://localhost:27017/mydb')
